@@ -1,0 +1,13 @@
+{
+    "name": "i3t",
+    "version": "0.0.1",
+    "description": "it tells the time",
+    "scripts": {
+      "dev": "nodemon index.js"
+    },
+    "devDependencies": {
+      "nodemon": "~3.0.1"
+    },
+    "dependencies": {
+    }
+  }
