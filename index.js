@@ -1,1 +1,3 @@
-console.log("started.....")
+const convert = require("./src/converter")
+
+console.log("started.....", convert("JP", "MM"))
