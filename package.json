@@ -5,10 +5,15 @@
     "type": "module",
     "scripts": {
         "dev": "nodemon index.js",
-        "test": "vitest"
+        "test": "vitest",
+        "test_": "vitest -t"
     },
     "devDependencies": {
+        "@vitest/ui": "^1.6.0",
         "nodemon": "~3.0.1",
         "vitest": "^1.6.0"
+    },
+    "dependencies": {
+        "moment-timezone": "^0.5.45"
     }
 }
