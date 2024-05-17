@@ -2,12 +2,13 @@
     "name": "i3t",
     "version": "0.0.1",
     "description": "it tells the time",
+    "type": "module",
     "scripts": {
-      "dev": "nodemon index.js"
+        "dev": "nodemon index.js",
+        "test": "vitest"
     },
     "devDependencies": {
-      "nodemon": "~3.0.1"
-    },
-    "dependencies": {
+        "nodemon": "~3.0.1",
+        "vitest": "^1.6.0"
     }
-  }
+}
