@@ -2,8 +2,8 @@
 
 - [ ] validate from and to
   - hour <= 12 or 24
-  - min < 59
-  - sec < 59
+  - min <= 59
+  - sec <= 59
   - use AM & PM
   - tz must be in Moment tz format
 - [ ] throw error
