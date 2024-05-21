@@ -1,4 +1,3 @@
-// const convert = require("./src/converter")
 import { convert } from './src/converter.js'
 
-console.log("started.....", convert("JP", "MM"))
+console.log("started.....", convert({ from_tz: "Asia/Tokyo", to_tz: "Asia/Rangoon" }))

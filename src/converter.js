@@ -1,11 +1,11 @@
-import { getAllTzs } from './src/timezone.js'
+import { checkInvalidObject } from '../helpers/validate-object.js'
+import { getAllTzs } from './timezone.js'
 
 export const convert = (opt) => {
     // validation
-    // console.log('--------------', !opt)
 
     // object validation twy ko helper htl po
-    if (!opt || typeof opt !== 'object' || Object.keys(opt).length < 1) {
+    if (checkInvalidObject(opt)) {
         throw new Error('Invalid Params')
     }
 
@@ -15,5 +15,19 @@ export const convert = (opt) => {
         throw new Error('from_tz is required')
     }
 
-    return "convert from " + " to ";
+    if (!to_tz) {
+        throw new Error('to_tz is required')
+    }
+
+    const tzs = getAllTzs()
+    
+    if (!tzs.includes(from_tz)) {
+        throw new Error('from_tz value is not supported')
+    }
+
+    if (!tzs.includes(to_tz)) {
+        throw new Error('to_tz value is not supported')
+    }
+
+    return "convert from " + from_tz + " to " + to_tz;
 }
