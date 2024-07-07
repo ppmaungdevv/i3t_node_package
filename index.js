@@ -1,3 +1,5 @@
-import { convert } from './src/converter.js'
+console.log('test')
 
-console.log("started.....", convert({ from_tz: "Asia/Tokyo", to_tz: "Asia/Rangoon" }))
+export const getTest = () => {
+    return 'get test success'
+}
