@@ -1,5 +1,9 @@
-console.log('test')
+import { convert } from './src/converter'
 
 export const getTest = () => {
-    return 'get test success'
+    return 'Success'
+}
+
+export {
+    convert
 }
