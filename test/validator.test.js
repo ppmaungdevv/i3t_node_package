@@ -1,5 +1,39 @@
 import { expect, test } from 'vitest'
-import { isInvalidObject, isValidTz } from '../validator/validator'
+import { isInvalidObject, isValidTz, isValidTimeFormat } from '../validator/validator'
+
+/* 
+*
+* Time format validator test
+*
+*/
+
+test('test isValidTimeFormat validation func with no param', () => {
+   expect(isValidTimeFormat()).toBe(false) // default time zone for Intl.DateTimeFormat is the local time zone of the environment 
+})
+
+test('test isValidTimeFormat validation func with invalid param', () => {
+   expect(isValidTimeFormat(false)).toBe(false)
+})
+
+test('test isValidTimeFormat validation func with invalid time string', () => {
+   expect(isValidTimeFormat('false')).toBe(false)
+   expect(isValidTimeFormat('24:61')).toBe(false) // 24 hrs format
+   expect(isValidTimeFormat('23:15 PM')).toBe(false) // hh:mm a format
+
+})
+
+test('test isValidTimeFormat validation func with valid time string', () => {
+   expect(isValidTimeFormat('23:15')).toBe(true) // 24 hrs format
+   expect(isValidTimeFormat('00:00')).toBe(true) // 24 hrs format
+   expect(isValidTimeFormat('11:15 PM')).toBe(true) // hh:mm a format
+})
+
+
+/* 
+*
+* Time zone validator test
+*
+*/
 
 test('test Tz validation func with no param', () => {
     expect(isValidTz()).toBe(true) // default time zone for Intl.DateTimeFormat is the local time zone of the environment 
