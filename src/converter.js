@@ -1,10 +1,10 @@
 import { format } from 'date-fns';
 import { fromZonedTime, toZonedTime } from 'date-fns-tz'
 import { ValidationError } from '../error/errors'
-import { isValidTz, isValidTimeFormat } from '../validator/validator'
+import { isValidTz, isValidTimeFormat, isValidDateFormat } from '../validator/validator'
 
 
-export const convert = (from_tz, to_tz, timeString, d) => {
+export const convert = (from_tz, to_tz, time_string, date_string) => {
     if (!from_tz) {
         throw new ValidationError('from_tz is required', "convert('Continent/City', 'Continent/City', 'hh:mm a')")
     }
@@ -13,8 +13,8 @@ export const convert = (from_tz, to_tz, timeString, d) => {
         throw new ValidationError('to_tz is required', "convert('Continent/City', 'Continent/City', 'hh:mm a')")
     }
 
-    if (timeString == null) {
-        throw new ValidationError('timestring is required', "convert('Continent/City', 'Continent/City', 'hh:mm a')")
+    if (time_string == null) {
+        throw new ValidationError('time_string is required', "convert('Continent/City', 'Continent/City', 'hh:mm a')")
     }
     
     if (!isValidTz(from_tz) || !isValidTz(to_tz)) {
@@ -24,8 +24,14 @@ export const convert = (from_tz, to_tz, timeString, d) => {
 
     // time format must be 'hh:mm AM||PM' or 24 hr fomat
 
-    if (typeof timeString !== 'string' || !isValidTimeFormat(timeString)) {
+    if (typeof time_string !== 'string' || !isValidTimeFormat(time_string)) {
         throw new ValidationError('Invalid time format', "time format must be 'HH:mm' or 'hh:mm a'")
+    }
+
+    // date format must be 'yyyy-MM-dd' or 'yyyy/MM/dd'
+
+    if (date_string !== null && !isValidDateFormat(date_string)) {
+        throw new ValidationError('Invalid date format', "date format must be 'yyyy-MM-dd' or 'yyyy/MM/dd'")
     }
 
     // Get the current date

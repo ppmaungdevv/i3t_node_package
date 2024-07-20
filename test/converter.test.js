@@ -30,15 +30,15 @@ test('test convert func without to_tz', () => {
     }
 })
 
-test('test convert func without timestring', () => {
+test('test convert func without time_string', () => {
     try {
         convert('Asia/Bangkok', 'Asia/Tokyo');
         throw new Error("expected function to throw an error, but it didn't")
     } catch (error) {
-        expect(error.message).toBe('timestring is required')
+        expect(error.message).toBe('time_string is required')
         expect(error.DESCRIPTION).toBe("convert('Continent/City', 'Continent/City', 'hh:mm a')")
         expect(error.ERROR_CODE).toBe('VALIDATION_ERROR')
-        expect(error.ERROR_MSG).toBe('timestring is required')
+        expect(error.ERROR_MSG).toBe('time_string is required')
         expect(error.ERROR_NAME).toBe('ValidationError')
     }
 })
@@ -71,7 +71,7 @@ test('test convert func with invalid to_tz', () => {
     }
 })
 
-test('test convert func with invalid time', () => {
+test('test convert func with invalid time_string', () => {
     try {
         convert('Asia/Bangkok', 'Asia/Tokyo', false);
         throw new Error("expected function to throw an error, but it didn't")
@@ -84,3 +84,15 @@ test('test convert func with invalid time', () => {
     }
 })
 
+test('test convert func with invalid date_string', () => {
+    try {
+        convert('Asia/Bangkok', 'Asia/Tokyo', '10:15', false);
+        throw new Error("expected function to throw an error, but it didn't")
+    } catch (error) {
+        expect(error.message).toBe('Invalid date format')
+        expect(error.DESCRIPTION).toBe("date format must be 'yyyy-MM-dd' or 'yyyy/MM/dd'")
+        expect(error.ERROR_CODE).toBe('VALIDATION_ERROR')
+        expect(error.ERROR_MSG).toBe('Invalid date format')
+        expect(error.ERROR_NAME).toBe('ValidationError')
+    }
+})

@@ -14,22 +14,42 @@ export const isValidTz = (tz) => {
     }
 }
 
-export const isValidTimeFormat = (timeString) => {
+export const isValidTimeFormat = (time_string) => {
     // time format must be 'hh:mm AM||PM' or 24 hr fomat
     
-    if (typeof timeString !== 'string') {
+    if (typeof time_string !== 'string') {
         return false
     }
 
     const formats = ['HH:mm', 'hh:mm a']
 
     for (const format of formats) {
-        const parsedTime = parse(timeString, format, new Date())
+        const parsed_time = parse(time_string, format, new Date())
         // isValid
-        if (isValid(parsedTime)) {
+        if (isValid(parsed_time)) {
             return true
         }
     }
     
+    return false
+}
+
+export const isValidDateFormat = (date_string) => {
+    // date format must be 'yyyy-MM-dd' or 'yyyy/MM/dd'
+    
+    if (typeof date_string !== 'string') {
+        return false
+    }
+
+    const formats = ['yyyy-MM-dd', 'yyyy/MM/dd']
+    // const format = 'yyyy-MM-dd'
+
+    for (const format of formats) {
+        const parsed_date = parse(date_string, format, new Date())
+        if (isValid(parsed_date) && parsed_date.toString() !== 'Invalid Date') {
+            return true
+        }
+    }
+
     return false
 }

@@ -1,5 +1,23 @@
 import { expect, test } from 'vitest'
-import { isInvalidObject, isValidTz, isValidTimeFormat } from '../validator/validator'
+import { isInvalidObject, isValidTz, isValidTimeFormat, isValidDateFormat } from '../validator/validator'
+
+/* 
+*
+* Time format validator test
+*
+*/
+
+test('test isValidDateFormat validation func with invalid param', () => {
+   expect(isValidDateFormat(false)).toBe(false)
+   expect(isValidDateFormat('10-23-2024')).toBe(false)
+})
+
+test('test isValidDateFormat validation func with valid param', () => {
+   expect(isValidDateFormat('2024-12-23')).toBe(true)
+   expect(isValidDateFormat('2024/12/23')).toBe(true)
+
+})
+
 
 /* 
 *
