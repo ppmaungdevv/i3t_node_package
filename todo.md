@@ -15,13 +15,13 @@
 {
     from :
         {
-            tz: from_tz,
-            time: from_time
+            form_tz: from_tz,
+            from_time: from_time
         },
     to :
         {
-            tz: to_tz,
-            time: to_time
+            to_tz: to_tz,
+            to_time: to_time
         }
 }
 ```

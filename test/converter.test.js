@@ -96,3 +96,55 @@ test('test convert func with invalid date_string', () => {
         expect(error.ERROR_NAME).toBe('ValidationError')
     }
 })
+
+
+test('test convert func with 24 hr format', () => {
+    expect(convert('Asia/Bangkok', 'Asia/Tokyo', '10:15')).toMatchObject(
+        {
+            from :
+                {
+                    from_tz: 'Asia/Bangkok',
+                    from_time: '10:15',
+                    from_date: '2024-07-23',
+                },
+            to :
+                {
+                    to_tz: 'Asia/Tokyo',
+                    to_time: '12:15',
+                    to_date: '2024-07-23',
+                }
+        }
+    )
+})
+
+test('test convert func with AM/PM format', () => {
+    expect(convert('Asia/Bangkok', 'Asia/Tokyo', '10:15 PM')).toMatchObject(
+        {
+            from :
+                {
+                    from_tz: 'Asia/Bangkok',
+                    from_time: '10:15 PM',
+                    from_date: '2024-07-23',
+                },
+            to :
+                {
+                    to_tz: 'Asia/Tokyo',
+                    to_time: '12:15 AM',
+                    to_date: '2024-07-24',
+                }
+        }
+    )
+})
+
+// {
+//     from :
+//         {
+//             form_tz: from_tz,
+//             from_time: from_time
+//         },
+//     to :
+//         {
+//             to_tz: to_tz,
+//             to_time: to_time
+//         }
+// }
