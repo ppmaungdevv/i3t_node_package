@@ -28,6 +28,7 @@ A simple time conversion package for diffferent time zones.
 | date (optional) | String | 'yyyy-MM-dd' <br> 'yyyy/MM/dd' | '2023-07-25' <br> '2023/07/25' |
 
 <br>
+
 ```c
 convert('Asia/Bangkok', 'Asia/Tokyo', '23:15')
 /*
