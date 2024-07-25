@@ -1,7 +1,7 @@
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 import { fromZonedTime, toZonedTime } from 'date-fns-tz'
 import { ValidationError } from '../error/errors'
-import { getFormattedTime } from '../helper/helpers'
+import { getFormattedTime, getDateFormat } from '../helper/helpers'
 import { isValidTz, isValidTimeFormat, isValidDateFormat } from '../validator/validator'
 
 
@@ -29,15 +29,19 @@ export const convert = (from_tz, to_tz, time_string, date_string) => {
         throw new ValidationError('Invalid time format', "time format must be 'HH:mm' or 'hh:mm a'")
     }
 
-    // **** date format must be 'yyyy-MM-dd' or 'yyyy/MM/dd'
+    
+    let date_format = 'yyyy-MM-dd',
+    origin_date_format = date_format,
+    date = format(new Date(), date_format);
+    
+    if (date_string != null) {
+        // **** date_string format must be 'yyyy-MM-dd' or 'yyyy/MM/dd'
+        if (!isValidDateFormat(date_string)) {
+            throw new ValidationError('Invalid date format', "date format must be 'yyyy-MM-dd' or 'yyyy/MM/dd'")
+        }
 
-    if (date_string != null && !isValidDateFormat(date_string)) {
-        throw new ValidationError('Invalid date format', "date format must be 'yyyy-MM-dd' or 'yyyy/MM/dd'")
-    }
-
-    let date = format(new Date(), 'yyyy-MM-dd')
-    if (date_string != null && isValidDateFormat(date_string)) {
-        date = date_string
+        origin_date_format = getDateFormat(date_string)
+        date = format(parse(date_string, origin_date_format, new Date()), date_format)
     }
 
     // **** date_fns utc only supports 24 hrs format, so need to format the time
@@ -50,20 +54,20 @@ export const convert = (from_tz, to_tz, time_string, date_string) => {
 
     const to = toZonedTime(from_utc_format, to_tz)
 
-    const to_time = format(to, origin_format), to_date = format(to, 'yyyy-MM-dd')
-    
-    return {
+    const converted_data = {
         from :
             {
-                from_date: date,
+                from_date: date_string ?? date,
                 from_time: time_string,
                 from_tz,
             },
         to :
             {
-                to_date,
-                to_time,
+                to_date: format(to, origin_date_format),
+                to_time: format(to, origin_format),
                 to_tz,
             }
     }
+
+    return converted_data
 }

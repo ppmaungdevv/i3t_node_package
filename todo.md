@@ -15,13 +15,15 @@
 {
     from :
         {
-            form_tz: from_tz,
-            from_time: from_time
+            from_tz: 'Asia/Bangkok',
+            from_time: '10:15 PM',
+            from_date: '2024-07-24',
         },
     to :
         {
-            to_tz: to_tz,
-            to_time: to_time
+            to_tz: 'Asia/Tokyo',
+            to_time: '12:15 AM',
+            to_date: '2024-07-25',
         }
 }
 ```

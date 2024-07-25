@@ -105,13 +105,13 @@ test('test convert func with 24 hr format', () => {
                 {
                     from_tz: 'Asia/Bangkok',
                     from_time: '10:15',
-                    from_date: '2024-07-23',
+                    from_date: '2024-07-24',
                 },
             to :
                 {
                     to_tz: 'Asia/Tokyo',
                     to_time: '12:15',
-                    to_date: '2024-07-23',
+                    to_date: '2024-07-24',
                 }
         }
     )
@@ -124,27 +124,52 @@ test('test convert func with AM/PM format', () => {
                 {
                     from_tz: 'Asia/Bangkok',
                     from_time: '10:15 PM',
-                    from_date: '2024-07-23',
+                    from_date: '2024-07-24',
                 },
             to :
                 {
                     to_tz: 'Asia/Tokyo',
                     to_time: '12:15 AM',
-                    to_date: '2024-07-24',
+                    to_date: '2024-07-25',
                 }
         }
     )
 })
 
-// {
-//     from :
-//         {
-//             form_tz: from_tz,
-//             from_time: from_time
-//         },
-//     to :
-//         {
-//             to_tz: to_tz,
-//             to_time: to_time
-//         }
-// }
+test('test convert func with date_string', () => {
+    expect(convert('Asia/Bangkok', 'Asia/Tokyo', '10:15 PM', '2020-12-23')).toMatchObject(
+        {
+            from :
+                {
+                    from_tz: 'Asia/Bangkok',
+                    from_time: '10:15 PM',
+                    from_date: '2020-12-23',
+                },
+            to :
+                {
+                    to_tz: 'Asia/Tokyo',
+                    to_time: '12:15 AM',
+                    to_date: '2020-12-24',
+                }
+        }
+    )
+})
+
+test('test convert func with date_string / format', () => {
+    expect(convert('Asia/Bangkok', 'Asia/Tokyo', '10:15 PM', '2020/12/23')).toMatchObject(
+        {
+            from :
+                {
+                    from_tz: 'Asia/Bangkok',
+                    from_time: '10:15 PM',
+                    from_date: '2020/12/23',
+                },
+            to :
+                {
+                    to_tz: 'Asia/Tokyo',
+                    to_time: '12:15 AM',
+                    to_date: '2020/12/24',
+                }
+        }
+    )
+})

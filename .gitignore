@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 
 pk_test
+released_test
 
 dist
 dist-ssr

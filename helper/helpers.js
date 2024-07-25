@@ -26,3 +26,21 @@ export const getFormattedTime = (time_string) => {
     return null
     
 }
+
+export const getDateFormat = (date_string) => {
+    
+    if (typeof date_string !== 'string') {
+        return null
+    }
+
+    const formats = ['yyyy-MM-dd', 'yyyy/MM/dd']
+
+    for (const format of formats) {
+        const parsed_date = parse(date_string, format, new Date())
+        if (isValid(parsed_date) && parsed_date.toString() !== 'Invalid Date') {
+            return format
+        }
+    }
+
+    return null
+}
