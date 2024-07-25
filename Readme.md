@@ -14,6 +14,8 @@ A simple time conversion package for diffferent time zones.
 | ------- | ---------------------------------- | ------------- | --------------------------------------------------------- |
 | convert | (from_timezone, to_timezone, time) | date          | Returns the converted time object with time zone and date |
 
+<br>
+
 **convert('from_tz', 'to_tz', 'time')**
 
 `convert()`, has three mandatory parameters and one optional parameter, returns the converted time with time zone and date.
