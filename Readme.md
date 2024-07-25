@@ -4,7 +4,7 @@
 
 It Tells the Time.
 
-A simple package for time conversion for diffferent time zones.
+A simple time conversion package for diffferent time zones.
 
 ## Usage
 
@@ -14,11 +14,11 @@ A simple package for time conversion for diffferent time zones.
 | ------- | ---------------------------------- | ------------- | --------------------------------------------------------- |
 | convert | (from_timezone, to_timezone, time) | date          | Returns the converted time object with time zone and date |
 
-#### convert('from_tz', 'to_tz', 'time')
+**convert('from_tz', 'to_tz', 'time')**
 
 `convert()`, has three mandatory parameters and one optional parameter, returns the converted time with time zone and date.
 
-#### Params
+**Params**
 
 | Name            | Type   | Format                         | Sample                         |
 | --------------- | ------ | ------------------------------ | ------------------------------ |
@@ -27,6 +27,7 @@ A simple package for time conversion for diffferent time zones.
 | time            | String | 'HH:mm' <br> 'hh:mm a'         | '23:15' <br> '10:15 PM'        |
 | date (optional) | String | 'yyyy-MM-dd' <br> 'yyyy/MM/dd' | '2023-07-25' <br> '2023/07/25' |
 
+<br>
 ```c
 convert('Asia/Bangkok', 'Asia/Tokyo', '23:15')
 /*
