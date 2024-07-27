@@ -8,8 +8,8 @@
   - ~~tz must be in Moment tz format~~
   - [x] used time string and date string for more simple validation
 - [x] throw error
-- [ ] convert from and to
-- [ ] return converted data in object
+- [x] convert from and to
+- [x] return converted data in object
 
 ```
 {
@@ -29,6 +29,30 @@
 ```
 
 - [x] Use TDD
+
+## Get Converted Time with Multiple Regions
+
+- to_tzs will be array
+  - accept like this ['Asia/Tokyo', 'Asia/Bangkok', ...]
+  - return like this
+  ```
+  {
+      from: {...},
+      to: [
+          {
+              to_tz: 'Asia/Tokyo',
+              to_time: '12:15 AM',
+              to_date: '2024-07-25',
+          },
+          {
+              to_tz: 'Asia/Tokyo',
+              to_time: '12:15 AM',
+              to_date: '2024-07-25',
+          },
+          ...
+      ]
+  }
+  ```
 
 ## Get Converted Time with Regions
 

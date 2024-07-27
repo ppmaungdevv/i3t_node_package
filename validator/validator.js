@@ -14,6 +14,10 @@ export const isValidTz = (tz) => {
     }
 }
 
+export const isValidMultiTzs = (tzs = []) => {
+    return tzs.filter(tz => !isValidTz(tz))
+}
+
 export const isValidTimeFormat = (time_string) => {
     // time format must be 'hh:mm AM||PM' or 24 hr fomat
     

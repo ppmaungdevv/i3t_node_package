@@ -1,6 +1,6 @@
 {
   "name": "i3t",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "it tells the time",
   "type": "module",
   "main": "dist/i3t.cjs",

@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { isInvalidObject, isValidTz, isValidTimeFormat, isValidDateFormat } from '../validator/validator'
+import { isInvalidObject, isValidTz, isValidMultiTzs, isValidTimeFormat, isValidDateFormat } from '../validator/validator'
 
 /* 
 *
@@ -53,19 +53,29 @@ test('test isValidTimeFormat validation func with valid time string', () => {
 *
 */
 
-test('test Tz validation func with no param', () => {
+test('test isValidTz func with no param', () => {
     expect(isValidTz()).toBe(true) // default time zone for Intl.DateTimeFormat is the local time zone of the environment 
 })
 
-test('test Tz validation func with invalid Tz', () => {
+test('test isValidTz func with invalid Tz', () => {
     expect(isValidTz('Africa_Abidjan')).toBe(false)
 })
 
-test('test Tz validation func with valid Tz', () => {
+test('test isValidTz func with valid Tz', () => {
     expect(isValidTz('Africa/Abidjan')).toBe(true)
 })
 
 // Africa/Abidjan
+
+// isValidMultiTzs
+
+test('test isValidMultiTzs func with invalid Tz', () => {
+   expect(isValidMultiTzs(['Africa/Abidjan', 'Invalid/Timezone'])).toEqual(['Invalid/Timezone'])
+})
+
+test('test isValidMultiTzs func with valid Tz', () => {
+   expect(isValidMultiTzs(['Asia/Tokyo', 'Asia/Bangkok'])).toEqual([])
+})
 
 /* 
 *
