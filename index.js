@@ -1,9 +1,10 @@
-import { convert } from './src/converter'
+import { convert, convertToMany } from './src/converter'
 
 export const getTest = () => {
     return 'Success'
 }
 
 export {
-    convert
+    convert,
+    convertToMany
 }

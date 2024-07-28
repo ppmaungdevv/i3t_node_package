@@ -6,6 +6,7 @@ import { isValidTz, isValidMultiTzs, isValidTimeFormat, isValidDateFormat } from
 
 
 const converter = (from_tz, to_tz, time_string, date, origin_date_format) => {
+    // **** date_fns utc only supports 24 hrs format, so need to format the time
 
     const { origin_format, formatted_time } = getFormattedTime(time_string)
 
@@ -14,7 +15,6 @@ const converter = (from_tz, to_tz, time_string, date, origin_date_format) => {
     const from_utc_format = fromZonedTime(date_time_string, from_tz)
 
     const to = toZonedTime(from_utc_format, to_tz)
-    console.log(date, to, date_time_string, from_utc_format, to_tz)
 
     return  {
                 to_date: format(to, origin_date_format),
@@ -62,16 +62,6 @@ export const convert = (from_tz, to_tz, time_string, date_string) => {
         date = format(parse(date_string, origin_date_format, new Date()), date_format)
     }
 
-    // **** date_fns utc only supports 24 hrs format, so need to format the time
-
-    const { origin_format, formatted_time } = getFormattedTime(time_string)
-
-    const date_time_string = `${date} ${formatted_time}`
-
-    const from_utc_format = fromZonedTime(date_time_string, from_tz)
-
-    const to = toZonedTime(from_utc_format, to_tz)
-
     const converted_data = {
         from :
             {
@@ -79,27 +69,22 @@ export const convert = (from_tz, to_tz, time_string, date_string) => {
                 from_time: time_string,
                 from_tz,
             },
-        to :
-            {
-                to_date: format(to, origin_date_format),
-                to_time: format(to, origin_format),
-                to_tz,
-            }
+        to : converter(from_tz, to_tz, time_string, date, origin_date_format)
     }
 
     return converted_data
 }
 
-export const convertToMany = (from_tz, to_tz, time_string, date_string) => {
+export const convertToMany = (from_tz, to_tzs, time_string, date_string) => {
     if (!from_tz) {
         throw new ValidationError('from_tz is required', "convertToMany('Continent/City', ['Continent/City', ...], 'hh:mm a')")
     }
 
-    if (!to_tz) {
+    if (!to_tzs) {
         throw new ValidationError('to_tzs is required', "convertToMany('Continent/City', ['Continent/City', ...], 'hh:mm a')")
     }
 
-    if (!Array.isArray(to_tz)) {
+    if (!Array.isArray(to_tzs)) {
         throw new ValidationError('Invalid type', "to_tzs must be an array, ['Continent/City', ...]")
     }
 
@@ -111,8 +96,8 @@ export const convertToMany = (from_tz, to_tz, time_string, date_string) => {
         throw new ValidationError('Invalid time zone format', "time zone format must be 'Continent/City'")
     }
 
-    if (isValidMultiTzs(to_tz).length > 0) {
-        throw new ValidationError('Invalid time zone format', isValidMultiTzs(to_tz) + " format must be 'Continent/City'")
+    if (isValidMultiTzs(to_tzs).length > 0) {
+        throw new ValidationError('Invalid time zone format', isValidMultiTzs(to_tzs) + " format must be 'Continent/City'")
     }
     
 
@@ -137,11 +122,6 @@ export const convertToMany = (from_tz, to_tz, time_string, date_string) => {
         date = format(parse(date_string, origin_date_format, new Date()), date_format)
     }
 
-    // **** date_fns utc only supports 24 hrs format, so need to format the time
-
-
-    // const converted_data = converter(from_tz, to_tz, time_string, date_string, date, origin_date_format)
-
     const converted_data = {
         from :
             {
@@ -153,11 +133,9 @@ export const convertToMany = (from_tz, to_tz, time_string, date_string) => {
         to: []
     }
 
-    to_tz.forEach(tz => {
+    to_tzs.forEach(tz => {
         converted_data.to.push(converter(from_tz, tz, time_string, date, origin_date_format))
     })
-
-    console.log(converted_data)
 
     return converted_data
 }
