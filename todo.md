@@ -33,8 +33,8 @@
 ## Get Converted Time with Multiple Regions
 
 - to_tzs will be array
-  - accept like this ['Asia/Tokyo', 'Asia/Bangkok', ...]
-  - return like this
+  - [x] accept like this ['Asia/Tokyo', 'Asia/Bangkok', ...]
+  - [x] return like this
   ```
   {
       from: {...},
@@ -61,7 +61,7 @@ conver(MMT, Europe) return all Europe time
 
 ## Get Supported Time Zone Lists
 
-- [x] return all the moment time zone lists with array of objects
+- [ ] return all the moment time zone lists with array of objects
 
 ```
 [
