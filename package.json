@@ -1,7 +1,8 @@
 {
   "name": "i3t",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "it tells the time",
+  "license": "MIT",
   "type": "module",
   "main": "dist/i3t.cjs",
   "module": "dist/i3t.es.js",
