@@ -108,3 +108,14 @@ convertToMany('Asia/Bangkok', ['Asia/Singapore', 'Asia/Tokyo', 'Asia/Yangon'], '
 } */
 
 ```
+
+## Dependencies
+
+This package uses the following dependencies:
+
+- [date-fns](https://github.com/date-fns/date-fns) - Licensed under the MIT License.
+- [date-fns-tz](https://github.com/marnusw/date-fns-tz) - Licensed under the MIT License.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.

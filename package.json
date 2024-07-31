@@ -1,6 +1,6 @@
 {
   "name": "i3t",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "it tells the time",
   "type": "module",
   "main": "dist/i3t.cjs",
@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "date-fns": "^3.6.0",
-    "date-fns-tz": "^3.1.3",
-    "i3t": "^0.1.0"
+    "date-fns-tz": "^3.1.3"
   }
 }
